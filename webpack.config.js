@@ -1,170 +1,145 @@
 'use strict'
+const path = require('path')
+		, os = require('os')
+		, {production = false} = require('webpack-nano/argv')
+	  , webpack = require('webpack')
+		, cssStandards = require('spike-css-standards')
+	  , ManifestPlugin = require('webpack-manifest-plugin')
+	  , MiniCssExtractPlugin = require('mini-css-extract-plugin')
+	  , HtmlWebpackPlugin = require('html-webpack-plugin')
+	  , {CheckerPlugin: TsChecker} = require('awesome-typescript-loader')
+		, HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+		, { WebpackPluginServe } = require('webpack-plugin-serve')
+	  , config = (env) => {
+			const isProd = production
+					, postcssRule = (test, parser) => {
+						const options = Object.assign
+						( cssStandards({ parser
+													 , minify: isProd
+													 , warnForDuplicates: !isProd
+													 })
+						, {sourceMap: true}
+						)
+						return { test
+									 , use:
+										 [ ...( isProd
+													? [{ loader: MiniCssExtractPlugin.loader }]
+													: [ { loader: 'style-loader'
+															, options: {sourceMap: true}
+															}
+														]
+													)
+										 , { loader: 'css-loader'
+											 , options: { importLoaders: 1
+																	, sourceMap: true
+																	}
+											 }
+										 , { loader: 'postcss-loader'
+											 , options
+											 }
+										 ]
+									 }
+					}
+			return { mode: isProd
+									 ? 'production'
+									 : 'development'
+						 // , context: path.resolve(__dirname, 'src')
+						 , entry:
+							 [ path.resolve('src', 'index.ts')
+							 , 'webpack-plugin-serve/client'
+							 ]
+						 , output: {filename: '[name].js'}
+						 , optimization: {splitChunks: {chunks: 'initial'}}
+						 , devtool: isProd
+											? 'source-map'
+											: 'cheap-module-eval-source-map'
+						 , module:
+							 { rules:
+								 [ postcssRule(/\.css$/)
+								 , postcssRule(/\.sss$/, 'sugarss')
+								 , { test: /\.pug$/
+									 , use:
+										 [ { loader: 'pug-loader'
+											 , options: {}
+											 }
+										 ]
+									 }
+								 , { test: /\.[jt]sx?$/
+									 , use:
+										 [ { loader: 'awesome-typescript-loader'
+											 , options:
+												 { useTranspileModule: true
+												 // , transpileOnly: true
+												 , configFileName: path.resolve
+													 ('webpack.tsconfig.json')
+												 , reportFiles: [path.resolve('src', '**', '*.{ts,tsx}')]
+												 }
+											 }
+										 ]
+									 }
+								 , { test: /\.svg$/
+									 , use: [fileLoader({publicPath: 'image'})]
+									 }
+								 , { test: /\.(?:woff2?|ttf|eot)$/
+									 , use: [fileLoader({publicPath: 'font'})]
+									 }
+								 , { test: /\.x?html?$/
+									 , exclude: /node_modules/
+									 , use: [fileLoader({publicPath: ''})]
+									 }
+								 ]
+							 }
+						 , resolve:
+							 { extensions:
+								 [ '.js'
+								 , '.json'
+								 , '.mjs'
+								 , '.wasm'
+								 , '.ts'
+								 , '.tsx'
+								 ]
+							 }
+						 , watch: !isProd
+						 , plugins:
+							 [ new HtmlWebpackPlugin
+								 ({ template: path.resolve('src', 'index.pug')
+									, filename: 'index.html'
+									, xhtml: true
+									})
+							 , new HardSourceWebpackPlugin()
+							 , new TsChecker()
+							 , new ManifestPlugin
+							 , new webpack.NamedModulesPlugin
+							 , ...( isProd
+										? [ new MiniCssExtractPlugin
+												({ filename: path.join('style', '[name].css')
+												 , chunkFilename: path.join('style', '[name].chunk.css')
+												 })
+											]
+										: [ new WebpackPluginServe
+												({ open: true
+												 , static: path.resolve('dist')
+												 , host: '::1'
+												 })
+											]
+										)
+							 ]
+
+			}
+		}
+		, fileLoader = ({ext = '[ext]', publicPath} = {}) => {
+			const options = {name: `[name].${ext}`}
+			if (publicPath) {
+				Object.assign
+				( options
+				, { outputPath: publicPath
+					, publicPath
+					}
+				)
+			}
+			return { loader: 'file-loader'
+						 , options
+						 }
+		}
+
 module.exports = config
-function config(env) {
-	const cssStandards = require('spike-css-standards')
-	    , cssCommentFilter = require('postcss-discard-comments')()
-	    , webpack = require('webpack')
-	    , path = require('path')
-	    , ManifestPlugin = require('webpack-manifest-plugin')
-	    , CleanWebpackPlugin = require('clean-webpack-plugin')
-	    , HtmlWebpackPlugin = require('html-webpack-plugin')
-	    , CopyWebpackPlugin = require('copy-webpack-plugin')
-	    , MiniCssExtractPlugin = require('mini-css-extract-plugin')
-	    , ATLoader = require('awesome-typescript-loader')
-	    , isProd = env && env.NODE_ENV === 'production'
-	    , buildDir = path.resolve(__dirname, 'docs')
-	    , context = path.resolve(__dirname, 'views')
-	    , output = { path: buildDir
-	               , filename: osPath('script/[name].js')
-	               , chunkFilename: osPath('script/[id].chunk.js')
-	               }
-	    , chunk = [ 'index' ]
-	return { context
-	       , entry: entrySet(chunk)
-	       , output: isProd
-	               ? output
-	               : Object.assign( output
-	                              , { devtoolModuleFilenameTemplate: '[absolute-resource-path]'
-	                                , devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
-	                                }
-	                              )
-	       , module:
-	         { rules:
-	           [ postcssRule(/\.css$/)
-	           , postcssRule(/\.sss$/, 'sugarss')
-	           , { test: /\.pug$/
-	             , use:
-	               [ { loader: 'pug-loader'
-	                 , options: {}
-	                 }
-	               ]
-	             }
-	           , { test: /\.[jt]sx?$/
-	             , use:
-	               [ { loader: 'awesome-typescript-loader'
-	                 , options:
-	                   { useTranspileModule: true
-	                   , transpileOnly: true
-	                   }
-	                 }
-	               ]
-	             }
-	           , { test: /\.svg$/
-	             , use: [ fileLoader(undefined, 'image/') ]
-	             }
-	           ]
-	         }
-	       , resolve:
-	         { extensions:
-	           [ '.js'
-	           , '.json'
-	           , '.ts'
-	           , '.tsx'
-	           ]
-	         }
-	       , devtool: isProd
-	                ? 'source-map'
-	                : 'cheap-module-eval-source-map'
-	       , devServer:
-	         { contentBase: buildDir
-	         , hot: !isProd
-	         }
-	       , plugins:
-	         [ new CleanWebpackPlugin([buildDir])
-	         , new CopyWebpackPlugin
-	           ([{ from: { glob: osPath('./image/*') } }])
-	         // , new ATLoader.CheckerPlugin
-	         , ...hwpArray(chunk)
-	         , new ManifestPlugin
-	         , new webpack.NamedModulesPlugin
-	         , ...( isProd
-	              ? [ new MiniCssExtractPlugin
-	                  ({ filename: osPath('style/[name].css')
-	                   , chunkFilename: osPath('style/[name].chunk.css')
-	                   })
-	                ]
-	              : [ new webpack.HotModuleReplacementPlugin ]
-	              )
-	         ]
-	       }
-	// each entry has a file directly under context
-	function entrySet(names) {
-		let entry = {}
-		for (let name of names) {
-			entry[name] = osPath(`./${name}`)
-		}
-		return entry
-	}
-	// chunk: string[] array of chunk names
-	function hwpArray(chunk) {
-		let hwpOptions = isProd
-		               ? hwpOptionsProd
-		               : hwpOptionsDev
-		return chunk
-		       .map((name) =>
-		          new HtmlWebpackPlugin(hwpOptions(name))
-		         )
-	}
-	function hwpOptionsDev(name) {
-		return { template: osPath(`./${name}.pug`)
-		       , filename: `${name}.html`
-		       , xhtml: true
-		       , chunks: [name]
-		       , locals: require(path.join(context, 'locals', name))
-		       }
-	}
-	function hwpOptionsProd(name) {
-		// default configuration creates shared chunks, default vendors: include them in the webpage
-		// https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693#configurate-cache-groups
-		let options = hwpOptionsDev(name)
-		options.chunks.unshift('default', 'vendors')
-		return options
-	}
-	function osPath(posixPath) {
-		return path.sep === '/'
-		     ? posixPath
-		     : posixPath.replace(/\//g, path.sep)
-	}
-	function postcssRule(test, parser) {
-		let options = cssStandards({ parser
-		                           , minify: isProd
-		                           , warnForDuplicates: !isProd
-		                           })
-		options.plugins.push(cssCommentFilter)
-		options.sourceMap = true
-		return { test
-		       , use:
-		         [ ...( isProd
-			            ? [ { loader: MiniCssExtractPlugin.loader } ]
-			            : [ { loader: 'style-loader'
-			                , options: { sourceMap: true }
-			                }
-			              ]
-			            )
-			       , { loader: 'css-loader'
-			         , options: { importLoaders: 1
-			                    , sourceMap: true
-			                    }
-			         }
-			       , { loader: 'postcss-loader'
-			         , options
-			         }
-		         ]
-		       }
-	}
-	function fileLoader(ext = '[ext]', publicPath) {
-		let options = { name: `[name].${ext}`
-		              }
-		if (publicPath) {
-			Object.assign
-			( options
-			, { outputPath: osPath(publicPath)
-			  , publicPath
-			  }
-			)
-		}
-		return { loader: 'file-loader'
-		       , options
-		       }
-	}
-}

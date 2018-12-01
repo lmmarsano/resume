@@ -1,3 +1,5 @@
+mixin icon(text)
+	span(title=text)&attributes(attributes): span.sr-only #{text}
 doctype html
 html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 	head
@@ -6,29 +8,32 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 		meta(name='author', content='Luis Marsano')
 		meta(name='viewport', content='width=device-width,initial-scale=1')
+		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.5.0/css/all.css', integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU', crossorigin='anonymous')
 	body
-		//- place most important information on 1st page
-			1–2 pages is fine
+		//-
+			2 pages at most
+			showcase most important information on 1st page
+			readable design
 			3–4 bullet points of relevant experience
-			use good whitespace, don't cram
+			use good whitespace, don't cram, easy to skim
 			spellcheck
-			save as pdf
+			save as pdf (preserve formatting)
 			use a non-terrible e-mail address
 			answer politely
 		header
 			h1 Luis Marsano
 			address.contact
 				dl
-					dt Telephone
-					dd
-						a(href='tel:+15026329019') 502 632 9019
-					dt E-mail
-					dd
-						a(href='mailto:luis.marsano@gmail.com') luis.marsano@gmail.com
+					dt: a(href='tel:+15026329019'): +icon('Telephone').fas.fa-phone
+					dd: a(href='tel:+15026329019') 502 632 9019
+					dt: a(href='mailto:luis.marsano@gmail.com'): +icon('E-mail').far.fa-envelope
+					dd: a(href='mailto:luis.marsano@gmail.com') luis.marsano@gmail.com
 					// website & github
-					dt GitHub
-					dd
-						a(href='//github.com/lmmarsano') github.com/lmmarsano
+					dt: a(href='//github.com/lmmarsano'): +icon('GitHub').fab.fa-github
+					dd: a(href='//github.com/lmmarsano') github.com/lmmarsano
+					dt: a(href='//linkedin.com/in/lmmarsano'): +icon('Linkedin').fab.fa-linkedin
+					dd: a(href='//linkedin.com/in/lmmarsano') linkedin.com/in/lmmarsano
+					//- linkedIn
 		main
 			//- section
 				header: h2 Summary
@@ -38,7 +43,8 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 			section.skills
 				// corroborate: tie skills to training or project or work below
 				header: h2 Technical Skills
-				// languages, databases, operating systems
+				//- languages, databases, operating systems
+					Corroborate skills with projects underneath
 				dl
 					dt Formal Languages
 					dd.
@@ -50,15 +56,17 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 						PERL,
 						POSIX shell scripting,
 						PowerShell,
+						Python,
 						Scheme,
+						SQL,
 						TeX,
 						Visual Basic,
 						#[abbr(title='eXtensible HyperText Markup Language') XHTML],
 						#[abbr(title='eXtensible Markup Language') XML]
 					//- dt Computer Programming
-						dd.
-							Practice functional, object-oriented, imperative, declarative programming disciplines.
-							Have education writing interfaces, writing commands that dispatch on type using deferred evaluation.
+					dd.
+						Practice functional, object-oriented, imperative, declarative programming disciplines.
+						Have education writing interfaces, writing commands that dispatch on type using deferred evaluation.
 					dt #[abbr(title='Information Technology') IT] Administration
 					dd Active Directory, Group Policy, System Center Configuration Manager, POSIX shell scripting
 					//- dt Mathematical Analysis
@@ -85,11 +93,16 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 							dd Louisville, Kentucky
 							dd 2013
 			section.exp
+				//- education: list courses by broad topic
 				header: h2 Experience
 				section
 					header: h3 Professional Development
 					dl
 						dt Code Louisville (Treehouse)
+						dd 2018
+						dt Data Science (Python, SQL)
+						dd 2018
+						dt Full-Stack Web Development (Node, Koa, Mongo)
 						dd 2018
 						dt Front End Web Development (HTML, CSS, JavaScript)
 						dd 2018
@@ -97,6 +110,12 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 					h3 Projects
 					dl
 						// name, link (github) 1–3 sentence description
+						dt Geospatial Analysis
+						dd
+							a(href='//github.com/lmmarsano/geospatial')
+						dd.
+							A data analysis exercise to practice technologies learned from Code Louisville: Python, Pandas, SQL.
+							Database extensions are used to perform spatial joins.
 						dt marsano:~$
 						dd
 							a(href='//github.com/lmmarsano/journal') github.com/lmmarsano/journal
@@ -105,7 +124,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 							Features template usage, webpack bundling, preprocessed languages.
 				section
 					header: h3 Technical Experience
-					// match keywords in description (beware automated filters)
+					//- match keywords in description (beware automated filters)
 						 list achievements: made, saved, achieved
 						 verb + context + impact
 						 attempt to quantify
@@ -116,10 +135,19 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 						dd (reduction in force) May 2014–August 2017
 						dd.summary
 							ul
-								li Self-instruct myself to administrate computer systems across an entire department, remotely configure and control them, automate software installations and updates, centralize malware alerts, and enable users to remotely access their workstations.nn
-								li Provide technical support to technical personnel and end users.
-								li Create and administrate web sites according to current and emerging standards.
-								li Save time running budget reports for numerous budget programs by writing scripts.
+								//- accomplishments: made, saved, achieved
+									money made, time saved
+									verb + context + impact
+									past tense for former roles
+									present tense for current job
+									toot your horn: post work as accomplishments
+									eg, improved efficiency
+									up to 10 years history is fine
+									highlight skills you want to use
+								li Saved time and improved maintenance and productivity by instructing myself and implementing methods to administrate computer systems across an entire department, remotely configure and control them, automate software installations and updates, centralize malware alerts, and enable users to remotely access their workstations.
+								li Boosted productivity by enhancing technical support quality &amp; response time with costless, remote service methods.
+								li Promoted a research conference by creating and administrating a web site to organize it and collect registrations.
+								li Saved time, improved quality, and reduced manual error with scripts I wrote to produce budget and expense tracking reports out of diverse, poorly structured input.
 						dt Technical Support
 						dd University of Louisville
 						dd Louisville, Kentucky
