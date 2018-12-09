@@ -1,18 +1,27 @@
 :root
-	font-family: system-ui, sans-serif
+	font-family: Corbel, sans-serif
+	/*font-family: system-ui, sans-serif*/
 	text-align: justify
 	margin: auto
 	max-width: 33em
+	--gap: 0.25em
+	--margin: calc(2em / 3)
 
 h1
 	text-align: center
 	font-size: xx-large
+	margin: var(--gap) auto
 
 h2
 	font-size: x-large
 
 h3
 	font-size: large
+
+h2, h3
+	margin: var(--margin) calc(-1 * var(--gap))
+	padding: 0 var(--gap)
+	border-radius: var(--gap)
 
 @media screen
 	h2, h3
@@ -24,35 +33,59 @@ h3
 		border: thin solid black
 
 h1, h2, h3, dt
-	font-family: Corbel, sans-serif
 	font-weight: bold
 
 ul
 	margin: 0 auto
-	padding: 0
-
-ol
-	padding: 0
-	list-style-type: none
-
-dl
-	overflow: auto
 
 .contact
 	& > dl
-		display: table
+		text-align: center
 		margin: auto
+		& > dt, & > dd
+			display: inline
+			margin-left: var(--margin)
+		& > dd + dt
+			border-left: black solid thin
+		& > dt
+			padding-left: var(--margin)
 
-.contact dt, .edu dt, .edu dd, .exp dt, .exp dd
-	clear: both
-	float: left
+.edu, .project
+	& ul
+		padding: initial
+		list-style-type: none
 
-.contact dd, .edu dt + dt, .edu dd + dd, .exp dt + dd, .exp dt + dd + dd + dd
-	clear: right
-	float: right
+.edu
+	& dt, & dd
+		margin: initial
+	& dd
+		text-align: right
+	& > dl
+		display: grid
+		grid: auto-flow / repeat(2, auto)
+		justify-content: space-between
+		align-items: first baseline
 
-.edu dd, .exp dt + dd + dd
-	margin: auto 0
+.work
+	& dd
+		margin: initial
+	& > dl
+		display: grid
+		grid: auto-flow / [job] auto [when] auto
+		justify-content: space-between
+	& .title, & .employer, & .where
+		grid-column: job
+	& .title, & .when
+		order: -1
+	& .when
+		grid-column: when
+		text-align: end
+	& .summary
+		grid-column: 1 / -1
+
+.project ul
+	display: flex
+	justify-content: space-between
 
 .footer
 	text-align: center

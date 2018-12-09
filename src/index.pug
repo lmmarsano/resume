@@ -1,14 +1,14 @@
 mixin icon(text)
 	span(title=text)&attributes(attributes): span.sr-only #{text}
 doctype html
-html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
+html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
 	head
 		title Résumé
 		meta(charset='utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		meta(name='author', content='Luis Marsano')
-		meta(name='viewport', content='width=device-width,initial-scale=1')
-		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.5.0/css/all.css', integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU', crossorigin='anonymous')
+		meta(http-equiv='X-UA-Compatible' content='IE=edge')
+		meta(name='author' content='Luis Marsano')
+		meta(name='viewport' content='width=device-width,initial-scale=1')
+		link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous')
 	body
 		//-
 			2 pages at most
@@ -28,6 +28,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 					dd: a(href='tel:+15026329019') 502 632 9019
 					dt: a(href='mailto:luis.marsano@gmail.com'): +icon('E-mail').far.fa-envelope
 					dd: a(href='mailto:luis.marsano@gmail.com') luis.marsano@gmail.com
+				dl
 					// website & github
 					dt: a(href='//github.com/lmmarsano'): +icon('GitHub').fab.fa-github
 					dd: a(href='//github.com/lmmarsano') github.com/lmmarsano
@@ -50,7 +51,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 					dd.
 						C,
 						#[abbr(title='Cascading StyleSheets') CSS],
-						#[abbr(title='European Computer Manufacturers Association') ECMA] Script/JavaScript,
+						#[abbr(title='European Computer Manufacturers Association') ECMA]Script/JavaScript,
 						F#,
 						Fortran,
 						PERL,
@@ -63,16 +64,18 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 						Visual Basic,
 						#[abbr(title='eXtensible HyperText Markup Language') XHTML],
 						#[abbr(title='eXtensible Markup Language') XML]
-					//- dt Computer Programming
+					dt Computer Programming
 					dd.
-						Practice functional, object-oriented, imperative, declarative programming disciplines.
-						Have education writing interfaces, writing commands that dispatch on type using deferred evaluation.
+						Open source coding.
+						Git revision control.
+						Functional, object-oriented, imperative, declarative programming disciplines.
+						Functional tests.
 					dt #[abbr(title='Information Technology') IT] Administration
 					dd Active Directory, Group Policy, System Center Configuration Manager, POSIX shell scripting
 					//- dt Mathematical Analysis
 						dd Create proofs, verify proofs, test validity, produce counterexamples.
 					dt Operating Systems
-					dd Comfortable in Linux, Windows, MacOS.
+					dd Linux, Windows, MacOS.
 					//- dt Office Applications
 						dd Work with word processing, spreadsheets, databases. Capable of automating repetitive tasks.
 					// list as non-technical
@@ -84,130 +87,210 @@ html(xmlns='http://www.w3.org/1999/xhtml', lang='en')
 			section.edu
 				// &amp; education: list training like treehouse
 				header: h2 Education
-				ol
-					li
-						dl
-							dt Science bachelor degree
-							dt Pure Mathematics
-							dd University of Louisville
-							dd Louisville, Kentucky
-							dd 2013
-			section.exp
-				//- education: list courses by broad topic
-				header: h2 Experience
-				section
-					header: h3 Professional Development
-					dl
-						dt Code Louisville (Treehouse)
-						dd 2018
-						dt Data Science (Python, SQL)
-						dd 2018
-						dt Full-Stack Web Development (Node, Koa, Mongo)
-						dd 2018
-						dt Front End Web Development (HTML, CSS, JavaScript)
-						dd 2018
-				section
-					h3 Projects
-					dl
-						// name, link (github) 1–3 sentence description
-						dt Geospatial Analysis
-						dd
-							a(href='//github.com/lmmarsano/geospatial')
-						dd.
-							A data analysis exercise to practice technologies learned from Code Louisville: Python, Pandas, SQL.
-							Database extensions are used to perform spatial joins.
-						dt marsano:~$
-						dd
-							a(href='//github.com/lmmarsano/journal') github.com/lmmarsano/journal
-						dd.
-							Accessible website exhibiting code learned in and outside of training.
-							Features template usage, webpack bundling, preprocessed languages.
-				section
-					header: h3 Technical Experience
-					//- match keywords in description (beware automated filters)
-						 list achievements: made, saved, achieved
-						 verb + context + impact
-						 attempt to quantify
-					dl
-						dt Technician/Administrative Associate
-						dd University of Louisville
-						dd Louisville, Kentucky
-						dd (reduction in force) May 2014–August 2017
-						dd.summary
-							ul
-								//- accomplishments: made, saved, achieved
-									money made, time saved
-									verb + context + impact
-									past tense for former roles
-									present tense for current job
-									toot your horn: post work as accomplishments
-									eg, improved efficiency
-									up to 10 years history is fine
-									highlight skills you want to use
-								li Saved time and improved maintenance and productivity by instructing myself and implementing methods to administrate computer systems across an entire department, remotely configure and control them, automate software installations and updates, centralize malware alerts, and enable users to remotely access their workstations.
-								li Boosted productivity by enhancing technical support quality &amp; response time with costless, remote service methods.
-								li Promoted a research conference by creating and administrating a web site to organize it and collect registrations.
-								li Saved time, improved quality, and reduced manual error with scripts I wrote to produce budget and expense tracking reports out of diverse, poorly structured input.
-						dt Technical Support
-						dd University of Louisville
-						dd Louisville, Kentucky
-						dd December 2007–February 2008
-						dd.summary
-							ul
-								li Troubleshoot students’ software problems.
-						dt Physics Research Assistant
-						dd University of Louisville
-						dd Louisville, Kentucky
-						dd January 2004–December 2007
-						dd.summary
-							ul
-								li Assist a professor in coding a computational model and present his findings.
-								li Informally update professor and assistants’ knowledge on development tools.
-						dt Mathematics Teaching Assistant
-						dd University of Michigan
-						dd Ann Arbor, Michigan
-						dd January 2004–December 2004
-						dd.summary
-							ul
-								li Grade coursework for Advanced Calculus, Linear Algebra, Elementary Mathematics.
-				section
-					header: h3 Customer Service Experience
-					dl
-						dt Cashier
-						dd Holiday Manor Kroger
-						dd Louisville, Kentucky
-						dd February 2009–November 2010
-						dd.summary
-							ul
-								li Thoroughly assist customers and ensure their needs are satisfied.
-								li Process orders at registers and supervise self-checkouts.
-								li Informally train coworkers on operating the registers and processing infrequent types of payment.
-						dt Server
-						dd Tokyo Japanese Restaurant
-						dd Louisville, Kentucky
-						dd May 2006–August 2007
-						dd.summary
-							ul
-								li Deliver prompt service and continued follow-up.
-								li Perform multiple support tasks (busing, cleaning, food preparation, dining area setup and closing) under supervisor’s direction.
-				section
-					header: h3 Warehouse Experience
-					dl
-						dt Package Loader and Sorter
-						dd United Parcel Service
-						dd Louisville, Kentucky
-						dd September 2010–February 2011
-						dd.summary
-							ul
-								li Inspect, screen, and load packages with care.
-								li Follow safe practices.
-						dt Data Entry
-						dd Swift & Company
-						dd Louisville, Kentucky
-						dd August 2007–September 2008
-						dd.summary
-							ul
-								li Prepare shipment manifests and submit data to billing.
+				dl
+					dt Code Louisville (Treehouse)
+					dd 2018
+					dt Data Science (Python, SQL)
+					dd 2018
+					dt Full-Stack Web Development (Node, Koa, Mongo)
+					dd 2018
+					dt Front End Web Development (HTML, CSS, JavaScript)
+					dd 2018
+					dt.degree
+						ul
+							li.type Science bachelor degree
+							li.area Pure Mathematics
+							li.institute University of Louisville
+					dd.year 2013
+			section.project
+				header: h2 Projects
+				dl
+					// name, link (github) 1–3 sentence description
+					dt: a(href='//github.com/lmmarsano/geospatial')
+						ul
+							li Geospatial Analysis
+							li lmmarsano/geospatial
+					dd.
+						A data analysis exercise of technologies learned from Code Louisville: Python, Jupyter, Pandas, SQL.
+						Database #[abbr(title='geographic information system') GIS] extensions are used to perform spatial joins.
+					dt: a(href='//github.com/geopandas/geopandas/pull/856')
+						ul
+							li fix &amp; enhance GeoPandas
+							li geopandas/geopandas#856
+					dd.
+						GeoPandas couldn’t import geometry columns with null values from geospatial databases and lacked SpatiaLite tests.
+						The merged pull request contains Python contributions that test, fix, &amp; optimize import routines.
+						It extends continuous integration environment definitions to perform those tests.
+						It led to related enhancements to the conda-forge project.
+					dt: a(href='//github.com/conda-forge/python-feedstock/pull/227')
+						ul
+							li enhance conda-forge’s Python
+							li conda-forge/python-feedstock#227
+					dd.
+						Conda’s Python 2 builds lacked a feature needed to run GeoPandas tests: enabling #[code sqlite3] module to load SQLite modules.
+						The merged pull request contains Python, #[abbr YAML], and diff patch contributions to test for the missing feature and enable it.
+					dt: a(href='//github.com/pyenv/pyenv-virtualenv/pull/290')
+						ul
+							li fix pyenv-virtualenv
+							li pyenv/pyenv-virtualenv#290
+					dd.
+						pyenv would fail to identify and activate conda environments.
+						Some code diving led me to a solution.
+						Though I couldn’t formulate tests for it and asked for guidance, the maintainer accepted the Bash script contributions anyway.
+					dt: a(href='//github.com/jklukas/sqlalchemy-views/pull/6')
+						ul
+							li fix sqlalchemy-views
+							li jklukas/sqlalchemy-views#6
+					dd.
+						sqlalchemy-views was rendering illegal SQL code.
+						The merged pull request contains Python contributions to test and fix it.
+					dt: a(href='//github.com/ResidentMario/geoplot/pull/65')
+						ul
+							li fix geoplot
+							li ResidentMario/geoplot#65
+					dd.
+						geoplot would fail to produce subplots.
+						I wrote tests to produce the error and traced it to illegal access to optional parameters.
+						The Python contribution tests the code, fixes it, and refactors the code to cut down repetition with class inheritance.
+					dt: a(href='//github.com/lmmarsano/spatialite')
+						ul
+							li enhance SpatiaLite dpkg
+							li lmmarsano/spatialite
+					dd.
+						The Ubuntu SpatiaLite package was missing some function interfaces and map definitions, so I edited some package definitions, generated missing maps, and rebuilt it.
+						Coded in makefiles and diff patches.
+					dt: a(href='//github.com/git/git/commit/786ef50a23cbd0e93d1e41982cfaba76801ed885')
+						ul
+							li enhance git credential-netrc helper
+							li git/git@786ef50
+					dd.
+						Git credential-netrc helper wasn’t decrypting credentials on systems that name the GPG application #[code gpg2] or using the name provided through git’s configuration files.
+						The Perl, shell script, &amp; makefile contribution tests &amp; enables credential-netrc to accept the option from git configuration and command arguments.
+						It also integrates the helper’s test suites with git’s main testing framework.
+					dt: a(href='//github.com/lmmarsano/koa-session-mongoose')
+						ul
+							li generalize koa-session-mongoose
+							li lmmarsano/koa-session-mongoose
+					dd.
+						The patch generalizes koa-session-mongoose middleware to accept any mongoose Connection object.
+						Coded in JavaScript for the node.js koa.js web server framework.
+					dt: a(href='//github.com/JoshuaWise/wise-river/pull/1')
+						ul
+							li fix wise-river
+							li JoshuaWise/wise-river#1
+					dd.
+						The contribution tests for and fixes a subtle coding error in wise-river’s cyclic buffer, which is used to implement observables for reactive functional programming.
+						Coded in JavaScript for a node.js framework.
+					dt: a(href='//github.com/lmmarsano/journal')
+						ul
+							li marsano:~$
+							li lmmarsano/journal
+					dd.
+						Accessible website exhibiting code learned in and outside of training.
+						Features template usage, webpack bundling, preprocessed languages.
+					dt: a(href='//github.com/lmmarsano/CustomPKI')
+						ul
+							li enhance New-SelfSignedCertificate
+							li lmmarsano/CustomPKI
+					dd.
+						Eases X.509 public key certificate creation on Windows with more accessible parameters for Subject Alternate Name fields and common Enhanced Key Usages by their friendly names.
+						Includes unit tests.
+						Coded in PowerShell.
+			section.work
+				header: h2 Technical Experience
+				//- match keywords in description (beware automated filters)
+					 list achievements: made, saved, achieved
+					 verb + context + impact
+					 attempt to quantify
+				dl
+					dt.title Technician/Administrative Associate
+					dd.employer University of Louisville
+					dd.where Louisville, Kentucky
+					dd.when 2014–2017
+					dd.summary
+						ul
+							//- accomplishments: made, saved, achieved
+								money made, time saved
+								verb + context + impact
+								past tense for former roles
+								present tense for current job
+								toot your horn: post work as accomplishments
+								eg, improved efficiency
+								up to 10 years history is fine
+								highlight skills you want to use
+							li Introduced the department to file shares, eliminating workplace inefficiencies &amp; saving employees time.
+							li Introduced the department to deployment images &amp; Configuration Manager to eliminate waste, repetitive labor &amp; dissatisfaction related to manual software installation &amp; servicing.
+							li Introduced the department to domains and Group Policy, enabling central management &amp; servicing, thus reducing frustration for staff &amp; technicians.
+							li Enabled Remote Assistance on all workstations to address technical problems for staff more quickly &amp; effectively.
+							li Enabled Remote Desktop on all workstations and showed employees the feature to improve workplace satisfaction &amp; productivity.
+							li Created and administered a web site to promote a research conference, organize it, and collect registrations.
+							li Wrote &amp; shared scripts to prepare budget &amp; expense tracking reports from low quality input, thus improving report quality &amp; saving time by reducing repetitive labor.
+							li By Investigating workplace policies and enlisting stakeholders, initiated staff senate action to improve work standards for accessibility with oversight and protections to appeal low-level decisions for review.
+				dl
+					dt.title Technical Support
+					dd.employer University of Louisville
+					dd.where Louisville, Kentucky
+					dd.when 2007–2008
+					dd.summary
+						ul
+							li Troubleshoot students’ software problems.
+				dl
+					dt.title Physics Research Assistant
+					dd.employer University of Louisville
+					dd.where Louisville, Kentucky
+					dd.when 2004–2007
+					dd.summary
+						ul
+							li Assist a professor in coding a computational model and presenting his findings.
+							li Informally train the professor and other assistants on development tools.
+				dl
+					dt.title Mathematics Teaching Assistant
+					dd.employer University of Michigan
+					dd.where Ann Arbor, Michigan
+					dd.when 2004
+					dd.summary
+						ul
+							li Evaluated and wrote instructive feedback on proofs submitted for Advanced Calculus, Linear Algebra, Elementary Mathematics.
+			section.work
+				header: h2 Customer Service Experience
+				dl
+					dt.title Cashier
+					dd.employer Holiday Manor Kroger
+					dd.where Louisville, Kentucky
+					dd.when 2009–2010
+					dd.summary
+						ul
+							li Thoroughly assist customers and ensure their needs are satisfied.
+							li Process orders at registers and supervise self-checkouts.
+							li Informally train coworkers on operating the registers and processing infrequent types of payment.
+				dl
+					dt.title Server
+					dd.employer Tokyo Japanese Restaurant
+					dd.where Louisville, Kentucky
+					dd.when 2006–2007
+					dd.summary
+						ul
+							li Deliver prompt service and continued follow-up.
+							li Perform multiple support tasks (busing, cleaning, food preparation, dining area setup and closing) under supervisor’s direction.
+			section.work
+				header: h2 Warehouse Experience
+				dl
+					dt.title Package Loader and Sorter
+					dd.employer United Parcel Service
+					dd.where Louisville, Kentucky
+					dd.when 2010–2011
+					dd.summary
+						ul
+							li Inspect, screen, and load packages with care.
+							li Follow safe practices.
+				dl
+					dt.title Data Entry
+					dd.employer Swift & Company
+					dd.where Louisville, Kentucky
+					dd.when 2007–2008
+					dd.summary
+						ul
+							li Prepare shipment manifests and submit data to billing.
 			section
 				header: h2 References
 				p Available on request
