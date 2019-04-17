@@ -50,9 +50,10 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
 					dt Formal Languages
 					dd.
 						C,
+						C♯,
 						#[abbr(title='Cascading StyleSheets') CSS],
 						#[abbr(title='European Computer Manufacturers Association') ECMA]Script/JavaScript,
-						F#,
+						F♯,
 						Fortran,
 						PERL,
 						POSIX shell scripting,
@@ -89,7 +90,9 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
 				header: h2 Education
 				dl
 					dt Code Louisville (Treehouse)
-					dd 2018
+					dd 2019–2018
+					dt Console Application Development (C♯)
+					dd 2019
 					dt Data Science (Python, SQL)
 					dd 2018
 					dt Full-Stack Web Development (Node, Koa, Mongo)
@@ -106,6 +109,21 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
 				header: h2 Projects
 				dl
 					// name, link (github) 1–3 sentence description
+					dt: a(href='//github.com/lmmarsano/alias')
+						ul
+							li Alias
+							li lmmarsano/alias
+					dd.
+						A general command alias generator: turn any command into an executable that runs that command.
+						Written in C♯ 8.0 for .NET Core 3.0 with asynchronous I/O and algebraic data types inspired by functional programming languages.
+						Designed to be cross-platform/OS agnostic.
+					dt: a(href='//github.com/lmmarsano/sumtype')
+						ul
+							li SumType: discriminated unions for C♯ 8
+							li lmmarsano/sumtype
+					dd.
+						A library of Haskell-inspired algebraic data types used in my Alias project.
+						LINQ-like methods provide monadic operators for handling missing values &amp; exceptions.
 					dt: a(href='//github.com/lmmarsano/geospatial')
 						ul
 							li Geospatial Analysis
